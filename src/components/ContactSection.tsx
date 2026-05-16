@@ -20,7 +20,7 @@ const contactInfo = [
     label: 'Telefon',
     value: '0386 252 64 44 (Ofis)\n0546 896 56 35 – Mehmet Ali Doğan\n0546 896 56 35 – Mustafa Doğan',
   },
-  { label: 'E-Posta', value: 'info@mustafadogan.com.tr' },
+  { label: 'E-Posta', value: 'doganyapitasarim@outlook.com.tr' },
   { label: 'Çalışma Saatleri', value: 'Pazartesi – Cumartesi\n08:00 – 18:00' },
 ]
 

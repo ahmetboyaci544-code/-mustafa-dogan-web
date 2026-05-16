@@ -117,9 +117,9 @@ export default function Footer() {
 
         <div className="hr-dark mb-8" />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="grid lg:grid-cols-4 gap-10 items-center">
           <p
-            className="text-xs"
+            className="text-xs lg:col-span-3"
             style={{ fontFamily: 'var(--font-sans)', color: 'rgba(255,255,255,0.3)' }}
           >
             © {year} Mustafa Doğan İnşaat Malzemeleri. Tüm hakları saklıdır.
@@ -128,13 +128,14 @@ export default function Footer() {
             href={`https://wa.me/905418397273?text=${encodeURIComponent('Merhaba, web sitesi hakkında bilgi alabilir miyim?')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 transition-opacity duration-200"
+            className="inline-flex items-center flex-wrap gap-x-2 gap-y-1 transition-opacity duration-200"
             style={{ opacity: 0.35 }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '0.35')}
           >
-            <span className="text-xs text-white" style={{ fontFamily: 'var(--font-sans)' }}>Tasarım:</span>
+            <span className="text-xs text-white" style={{ fontFamily: 'var(--font-sans)' }}>Bu Web Sitesi</span>
             <Image src="/images/sab-logo.png" alt="SAB Design" width={52} height={18} className="object-contain brightness-0 invert" />
+            <span className="text-xs text-white" style={{ fontFamily: 'var(--font-sans)' }}>tarafından tasarlanmıştır.</span>
           </a>
         </div>
       </div>
