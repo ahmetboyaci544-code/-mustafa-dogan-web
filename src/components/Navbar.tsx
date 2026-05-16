@@ -91,7 +91,7 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               {/* Instagram */}
               <a
-                href="https://www.instagram.com/doganyapitasarim"
+                href="https://www.instagram.com/doganyapitasarim.00"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:flex items-center justify-center w-9 h-9 cursor-pointer transition-opacity duration-200"
