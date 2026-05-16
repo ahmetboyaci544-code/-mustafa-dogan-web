@@ -1,7 +1,6 @@
 ﻿'use client'
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Image from 'next/image'
 
 const stats = [
   { value: '20+', label: 'Yıl Deneyim' },
@@ -26,14 +25,16 @@ export default function HeroSection() {
         style={mounted ? { y: bgY } : {}}
         className="absolute inset-0 scale-[1.12]"
       >
-        <Image
-          src="/images/hero-main.jpg"
-          alt="Mustafa Doğan İnşaat"
-          fill
-          priority
-          className="object-cover" style={{ objectPosition: '70% center' }}
-          sizes="100vw"
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: '70% center' }}
+        >
+          <source src="/videos/download.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-r from-[#0D0D0D] via-[#0D0D0D]/80 to-[#0D0D0D]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-[#0D0D0D]/40" />
