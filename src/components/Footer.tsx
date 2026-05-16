@@ -15,41 +15,71 @@ const footerLinks = [
   {
     title: 'Şirket',
     links: [
-      { label: 'Hakkımızda', href: '#hakkimizda' },
-      { label: 'Sevkiyat & Lojistik', href: '#sevkiyat' },
-      { label: 'Referanslar', href: '#referanslar' },
-      { label: 'Galeri', href: '#galeri' },
+      { label: 'Neden Biz', href: '#neden-biz' },
+      { label: 'Sevkiyat', href: '#sevkiyat' },
       { label: 'İletişim', href: '#iletisim' },
     ],
   },
 ]
 
+const scrollTo = (href: string) => {
+  const el = document.querySelector(href)
+  if (el) el.scrollIntoView({ behavior: 'smooth' })
+}
+
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-brand-black border-t border-white/5">
-      <div className="container-lg pt-16 pb-8">
-        {/* Top Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
-          {/* Brand column */}
+    <footer style={{ background: '#14305c' }}>
+      <div className="container-xl pt-16 pb-10">
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+
+          {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-5">
-              <div className="relative w-10 h-10">
-                <Image src="/images/logo.jpg" alt="Logo" fill className="object-contain" onError={() => {}} />
+              <div className="relative w-9 h-9 flex-shrink-0 bg-white/10 rounded-sm overflow-hidden">
+                <Image src="/images/logo.jpg" alt="Mustafa Doğan" fill className="object-contain" />
               </div>
               <div>
-                <div className="font-display text-white font-semibold text-lg leading-none">Mustafa Doğan</div>
-                <div className="font-label text-brand-gold text-xs tracking-[0.25em] uppercase mt-0.5">İnşaat Malzemeleri</div>
+                <div
+                  className="leading-none"
+                  style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.02em', color: '#FFFFFF' }}
+                >
+                  Mustafa Doğan
+                </div>
+                <div
+                  className="mt-1"
+                  style={{ fontFamily: 'var(--font-sans)', fontSize: '0.6rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}
+                >
+                  İnşaat Malzemeleri
+                </div>
               </div>
             </div>
-            <p className="text-brand-muted text-sm leading-relaxed max-w-xs mb-6">
-              Yılların deneyimi ve güçlü lojistik altyapısıyla Türkiye&apos;nin güvenilir
-              inşaat malzemeleri tedarikçisi. Her projede en kaliteli çözüm.
+
+            <p
+              className="text-sm leading-relaxed max-w-xs mb-6"
+              style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, color: 'rgba(255,255,255,0.55)' }}
+            >
+              Yılların deneyimi ve güçlü lojistik altyapısıyla Türkiye&apos;nin
+              güvenilir inşaat malzemeleri tedarikçisi.
             </p>
-            <div className="flex gap-3">
-              {['📍 Türkiye Geneli', '📞 7/24 Destek'].map((tag) => (
-                <span key={tag} className="font-label text-[10px] tracking-widest text-brand-muted/50 border border-white/10 px-3 py-1.5 uppercase">
+
+            <div className="flex gap-3 flex-wrap">
+              {['Kırşehir', 'Türkiye Geneli', '7/24 Destek'].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1.5"
+                  style={{
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.6rem',
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(255,255,255,0.4)',
+                  }}
+                >
                   {tag}
                 </span>
               ))}
@@ -59,7 +89,10 @@ export default function Footer() {
           {/* Nav columns */}
           {footerLinks.map((group) => (
             <div key={group.title}>
-              <div className="font-label text-brand-gold text-xs tracking-[0.3em] uppercase mb-5">
+              <div
+                className="mb-5"
+                style={{ fontFamily: 'var(--font-sans)', fontSize: '0.625rem', letterSpacing: '0.28em', textTransform: 'uppercase', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}
+              >
                 {group.title}
               </div>
               <ul className="space-y-3">
@@ -67,11 +100,11 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' })
-                      }}
-                      className="text-brand-muted hover:text-white text-sm transition-colors duration-200 animated-underline"
+                      onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
+                      className="text-sm transition-colors duration-200 cursor-pointer"
+                      style={{ fontFamily: 'var(--font-sans)', color: 'rgba(255,255,255,0.55)' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
                     >
                       {link.label}
                     </a>
@@ -82,29 +115,26 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Gold divider */}
-        <div className="flex items-center gap-4 mb-8">
-          <div className="flex-1 h-px bg-white/5" />
-          <div className="w-6 h-6 border border-brand-gold/30 rotate-45 flex items-center justify-center">
-            <div className="w-1.5 h-1.5 bg-brand-gold rotate-45" />
-          </div>
-          <div className="flex-1 h-px bg-white/5" />
-        </div>
+        <div className="hr-dark mb-8" />
 
-        {/* Bottom row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-brand-muted/50 text-xs">
+          <p
+            className="text-xs"
+            style={{ fontFamily: 'var(--font-sans)', color: 'rgba(255,255,255,0.3)' }}
+          >
             © {year} Mustafa Doğan İnşaat Malzemeleri. Tüm hakları saklıdır.
           </p>
           <a
             href={`https://wa.me/905418397273?text=${encodeURIComponent('Merhaba, web sitesi hakkında bilgi alabilir miyim?')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity duration-200"
+            className="flex items-center gap-2 transition-opacity duration-200"
+            style={{ opacity: 0.35 }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = '0.7')}
+            onMouseLeave={e => (e.currentTarget.style.opacity = '0.35')}
           >
-            <span className="text-brand-muted/70 text-xs">Bu site</span>
-            <Image src="/images/sab-logo.png" alt="SAB Design" width={60} height={20} className="object-contain" />
-            <span className="text-brand-muted/70 text-xs">tarafından tasarlanmıştır.</span>
+            <span className="text-xs text-white" style={{ fontFamily: 'var(--font-sans)' }}>Tasarım:</span>
+            <Image src="/images/sab-logo.png" alt="SAB Design" width={52} height={18} className="object-contain brightness-0 invert" />
           </a>
         </div>
       </div>

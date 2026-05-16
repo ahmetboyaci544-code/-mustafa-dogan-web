@@ -1,11 +1,10 @@
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
-import AboutSection from '@/components/AboutSection'
-import ProductsSection from '@/components/ProductsSection'
-import ShipmentSection from '@/components/ShipmentSection'
-import StatsSection from '@/components/StatsSection'
-import ReferencesSection from '@/components/ReferencesSection'
-import GallerySection from '@/components/GallerySection'
+import BrandMarquee from '@/components/BrandMarquee'
+import ProductShowcase from '@/components/ProductShowcase'
+import WhySantek from '@/components/WhySantek'
+import DeliverySection from '@/components/DeliverySection'
+import CTABanner from '@/components/CTABanner'
 import ContactSection from '@/components/ContactSection'
 import Footer from '@/components/Footer'
 
@@ -15,12 +14,11 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <AboutSection />
-        <ProductsSection />
-        <ShipmentSection />
-        <StatsSection />
-        <ReferencesSection />
-        <GallerySection />
+        <BrandMarquee />
+        <ProductShowcase />
+        <WhySantek />
+        <DeliverySection />
+        <CTABanner />
         <ContactSection />
       </main>
       <Footer />

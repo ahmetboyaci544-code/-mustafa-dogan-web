@@ -1,24 +1,18 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Inter, Barlow_Condensed } from 'next/font/google'
+import { Inter, Inter_Tight } from 'next/font/google'
 import './globals.css'
 
-const cormorant = Cormorant_Garamond({
+const interTight = Inter_Tight({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-cormorant',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-display',
   display: 'swap',
 })
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const barlow = Barlow_Condensed({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-barlow',
+  weight: ['300', '400', '500'],
+  variable: '--font-sans',
   display: 'swap',
 })
 
@@ -31,10 +25,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className={`${cormorant.variable} ${inter.variable} ${barlow.variable}`}>
-      <body style={{ backgroundColor: '#09090B', color: '#FAFAFA', margin: 0, padding: 0 }}>
-        {children}
-      </body>
+    <html lang="tr" className={`${interTight.variable} ${inter.variable}`}>
+      <body>{children}</body>
     </html>
   )
 }
