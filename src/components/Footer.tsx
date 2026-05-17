@@ -6,7 +6,7 @@ const footerLinks = [
     title: 'Ürünler',
     links: [
       { label: 'Kereste', href: '#urunler' },
-      { label: 'İnşaat Demiri', href: '#urunler' },
+      { label: 'Teleskopik Demir Direk', href: '#urunler' },
       { label: 'Plywood & OSB', href: '#urunler' },
       { label: 'Kalıp Sistemleri', href: '#urunler' },
       { label: 'Çatı Malzemeleri', href: '#urunler' },

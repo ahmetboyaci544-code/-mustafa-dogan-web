@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion'
 
 const categories = [
   'Kereste',
-  'İnşaat Demiri',
+  'Teleskopik Demir Direk',
   'Plywood',
   'OSB Levha',
   'Kalıp Sistemi',

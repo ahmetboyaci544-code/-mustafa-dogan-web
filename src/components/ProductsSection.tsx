@@ -17,12 +17,12 @@ const products = [
   },
   {
     id: 'demir',
-    title: 'İnşaat Demiri',
-    subtitle: 'Structural Steel',
-    desc: 'Nervürlü inşaat demiri, profil çelik ve bağlantı elemanları. Yüksek mukavemet, standart uyumlu çelik ürünleri.',
+    title: 'Teleskopik Demir Direk',
+    subtitle: 'Telescopic Systems',
+    desc: 'Kalıp sistemlerinde kullanılan teleskopik demir direkler. Yüksek yük taşıma kapasitesi ve ayarlanabilir boy seçenekleriyle güvenli destek çözümleri.',
     image: '/images/demir-sevkiyat.jpg',
     fallbackGradient: 'from-[#1C2B3A] to-[#2D3F52]',
-    items: ['Nervürlü Demir', 'İnşaat Profilleri', 'Hasır Çelik', 'Bağlantı Elemanları'],
+    items: ['Ayarlanabilir Boy', 'Yüksek Mukavemet', 'Kalıp Sistemi', 'Büyük Stok'],
   },
   {
     id: 'plywood',

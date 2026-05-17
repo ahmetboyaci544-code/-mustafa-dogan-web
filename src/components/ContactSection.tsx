@@ -115,7 +115,7 @@ export default function ContactSection() {
                 <select name="product" value={form.product} onChange={handleChange} className={`${inputClass} sm:col-span-2`} style={{ fontFamily: 'var(--font-sans)' }}>
                   <option value="">Ürün Kategorisi Seçin</option>
                   <option>Kereste</option>
-                  <option>İnşaat Demiri</option>
+                  <option>Teleskopik Demir Direk</option>
                   <option>Plywood & OSB</option>
                   <option>Kalıp Sistemleri</option>
                   <option>Çatı Malzemeleri</option>
