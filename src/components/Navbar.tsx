@@ -7,6 +7,7 @@ const navLinks = [
   { href: '#urunler', label: 'Ürünler' },
   { href: '#neden-biz', label: 'Neden Biz' },
   { href: '#sevkiyat', label: 'Sevkiyat' },
+  { href: '#biz-kimiz', label: 'Biz Kimiz' },
   { href: '#iletisim', label: 'İletişim' },
 ]
 

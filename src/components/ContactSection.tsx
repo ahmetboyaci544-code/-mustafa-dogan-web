@@ -48,7 +48,7 @@ export default function ContactSection() {
 
   return (
     <section id="iletisim" ref={ref} className="bg-[#F7F6F3]">
-      <div className="container-xl py-24 lg:py-32">
+      <div className="container-xl pt-12 pb-24 lg:pt-16 lg:pb-32">
 
         <motion.div
           initial={{ opacity: 0, y: 14 }}
@@ -155,36 +155,30 @@ export default function ContactSection() {
             {contactInfo.map((info) => (
               <div key={info.label} className="border-b border-black/[0.07] pb-7">
                 <div className="label mb-3" style={{ color: '#6B6B6B' }}>{info.label}</div>
-                <div className="text-sm leading-relaxed whitespace-pre-line" style={{ fontFamily: 'var(--font-sans)', color: '#444444' }}>
-                  {info.value}
-                </div>
+                {info.label === 'Telefon' ? (
+                  <div className="flex flex-col gap-1">
+                    {info.value.split('\n').map((line) => {
+                      const digits = line.replace(/\D/g, '')
+                      const tel = digits.startsWith('0') ? '+90' + digits.slice(1) : '+90' + digits
+                      return (
+                        <a
+                          key={line}
+                          href={`tel:${tel}`}
+                          className="text-sm leading-relaxed hover:text-[#14305c] transition-colors duration-200"
+                          style={{ fontFamily: 'var(--font-sans)', color: '#444444' }}
+                        >
+                          {line}
+                        </a>
+                      )
+                    })}
+                  </div>
+                ) : (
+                  <div className="text-sm leading-relaxed whitespace-pre-line" style={{ fontFamily: 'var(--font-sans)', color: '#444444' }}>
+                    {info.value}
+                  </div>
+                )}
               </div>
             ))}
-
-            <a
-              href="tel:+905468965635"
-              className="flex items-center gap-4 group cursor-pointer pt-2"
-            >
-              <div
-                className="w-10 h-10 flex items-center justify-center flex-shrink-0 group-hover:opacity-80 transition-opacity duration-200"
-                style={{ background: '#14305c' }}
-              >
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-              </div>
-              <div>
-                <div className="label mb-1" style={{ color: '#6B6B6B', fontSize: '0.58rem' }}>Hemen Ara</div>
-                <div className="text-sm font-medium" style={{ fontFamily: 'var(--font-sans)', color: '#111111' }}>+90 546 896 56 35</div>
-              </div>
-              <svg
-                className="w-4 h-4 ml-auto group-hover:translate-x-1 transition-transform duration-200"
-                style={{ color: '#14305c' }}
-                fill="none" stroke="currentColor" viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
           </motion.div>
         </div>
       </div>
