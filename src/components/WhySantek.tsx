@@ -3,7 +3,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const bigStats = [
-  { value: 20, suffix: '+', unit: 'Yıl', label: 'Sektör Deneyimi' },
+  { value: 30, suffix: '+', unit: 'Yıl', label: 'Sektör Deneyimi' },
   { value: 500, suffix: '+', unit: 'Ürün', label: 'Geniş Portföy' },
   { value: 81, suffix: '', unit: 'İl', label: 'Türkiye Geneli' },
 ]

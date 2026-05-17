@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const stats = [
-  { value: '20+', label: 'Yıl Deneyim' },
+  { value: '30+', label: 'Yıl Deneyim' },
   { value: '500+', label: 'Ürün Çeşidi' },
   { value: '81', label: 'İl Kapsamı' },
 ]
