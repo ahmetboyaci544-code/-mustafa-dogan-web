@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import CatalogModal from '@/components/CatalogModal'
@@ -15,7 +15,13 @@ const products = [
     description:
       'Her boyut ve kalitede yapısal kereste, lata, kiriş ve özel kesim çözümleri. Projenizin ölçeğine göre kalibre edilmiş ahşap tedariki.',
     specs: ['Yapısal Kereste', 'Lata & Kiriş', 'Özel Kesim', 'Büyük Stok'],
-    image: '/images/kereste-sevkiyat-1.jpg',
+    images: [
+      '/images/kereste-sevkiyat-1.jpg',
+      '/images/katalog/kereste-katalog-1.jpg',
+      '/images/kereste-1.jpg',
+      '/images/kereste-2.jpg',
+      '/images/kereste-3.jpg',
+    ],
     fallback: 'from-[#2A1F14] to-[#3D2B1F]',
   },
   {
@@ -26,7 +32,11 @@ const products = [
     description:
       'Kalıp sistemlerinde kullanılan teleskopik demir direkler. Yüksek yük taşıma kapasitesi ve ayarlanabilir boy seçenekleriyle güvenli destek çözümleri.',
     specs: ['Ayarlanabilir Boy', 'Yüksek Mukavemet', 'Kalıp Sistemi', 'Büyük Stok'],
-    image: '/images/demir-sevkiyat.jpg',
+    images: [
+      '/images/demir-sevkiyat.jpg',
+      '/images/demir-sevkiyat-a.jpg',
+      '/images/demir-sevkiyat-b.jpg',
+    ],
     fallback: 'from-[#0E1A26] to-[#1C2B3A]',
   },
   {
@@ -37,7 +47,14 @@ const products = [
     description:
       'Kalıp plywood, OSB levha ve özel panel çözümleri. Dayanıklı yapı, mükemmel yüzey kalitesiyle uzun ömürlü kullanım.',
     specs: ['Kalıp Plywood', 'OSB Levha', 'Kaplamalı Panel', 'Özel Ebat'],
-    image: '/images/plywood-sevkiyat-a.jpg',
+    images: [
+      '/images/plywood-sevkiyat-a.jpg',
+      '/images/katalog/plywood-osb-1.jpg',
+      '/images/katalog/plywood-osb-2.jpg',
+      '/images/katalog/plywood-osb-3.jpg',
+      '/images/katalog/plywood-osb-4.jpg',
+      '/images/plywood.jpg',
+    ],
     fallback: 'from-[#201A0E] to-[#2D2416]',
   },
   {
@@ -48,7 +65,15 @@ const products = [
     description:
       'Kiremit, çatı kaplama levhaları, yalıtım ve tüm çatı sistemleri. Güvenli, estetik ve uzun ömürlü çatı çözümleri.',
     specs: ['Beton Kiremit', 'Çatı Levhası', 'İzolasyon', 'Yağmur Oluğu'],
-    image: '/images/cati-kiremit.jpg',
+    images: [
+      '/images/cati-kiremit.jpg',
+      '/images/katalog/kilicoglu-kiremit-1.jpg',
+      '/images/katalog/kilicoglu-kiremit-2.jpg',
+      '/images/katalog/kilicoglu-kiremit-3.jpg',
+      '/images/katalog/ece-kiremit-1.jpg',
+      '/images/katalog/ece-kiremit-2.jpg',
+      '/images/kiremit-sevkiyat-a.jpg',
+    ],
     fallback: 'from-[#1E100A] to-[#2C1810]',
   },
 ]
@@ -136,6 +161,18 @@ export default function ProductShowcase() {
 function ProductItem({ product, index }: { product: typeof products[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const [slide, setSlide] = useState(0)
+  const [hovered, setHovered] = useState(false)
+
+  const total = product.images.length
+  const prev = useCallback(() => setSlide((s) => (s - 1 + total) % total), [total])
+  const next = useCallback(() => setSlide((s) => (s + 1) % total), [total])
+
+  useEffect(() => {
+    if (hovered) return
+    const id = setInterval(next, 4000)
+    return () => clearInterval(id)
+  }, [hovered, next])
 
   const waMsg = encodeURIComponent(`Merhaba, ${product.title} ürünü hakkında bilgi almak istiyorum.`)
   const waLink = `https://wa.me/${WHATSAPP}?text=${waMsg}`
@@ -146,30 +183,87 @@ function ProductItem({ product, index }: { product: typeof products[0]; index: n
     <div ref={ref}>
       <div className={`grid lg:grid-cols-2 ${isReversed ? 'lg:grid-flow-col-dense' : ''}`}>
 
-        {/* Image */}
+        {/* Image Slider */}
         <div
           className={`relative overflow-hidden ${isReversed ? 'lg:col-start-2' : ''}`}
           style={{ minHeight: '460px' }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         >
-          <motion.div
-            className="absolute inset-0"
-            initial={{ scale: 1.06 }}
-            animate={inView ? { scale: 1 } : {}}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className={`absolute inset-0 bg-gradient-to-br ${product.fallback}`} />
-            <Image
-              src={product.image}
-              alt={product.title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-black/20" />
-          </motion.div>
+          <AnimatePresence mode="sync">
+            <motion.div
+              key={slide}
+              className="absolute inset-0"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${product.fallback}`} />
+              <Image
+                src={product.images[slide]}
+                alt={`${product.title} ${slide + 1}`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-black/20" />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation arrows */}
+          {total > 1 && (
+            <>
+              <button
+                onClick={prev}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center transition-all duration-200"
+                style={{ background: 'rgba(0,0,0,0.35)', color: '#fff' }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.65)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.35)')}
+                aria-label="Önceki"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center transition-all duration-200"
+                style={{ background: 'rgba(0,0,0,0.35)', color: '#fff' }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.65)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(0,0,0,0.35)')}
+                aria-label="Sonraki"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </>
+          )}
+
+          {/* Dot indicators */}
+          {total > 1 && (
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5">
+              {product.images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setSlide(i)}
+                  className="transition-all duration-300"
+                  style={{
+                    width: i === slide ? '20px' : '6px',
+                    height: '6px',
+                    borderRadius: '3px',
+                    background: i === slide ? '#ffffff' : 'rgba(255,255,255,0.45)',
+                  }}
+                  aria-label={`Görsel ${i + 1}`}
+                />
+              ))}
+            </div>
+          )}
+
           {/* Index watermark */}
           <div
-            className="absolute bottom-5 right-5 leading-none pointer-events-none"
+            className="absolute bottom-5 right-5 leading-none pointer-events-none z-10"
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 800,
