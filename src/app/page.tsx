@@ -5,6 +5,7 @@ import ProductShowcase from '@/components/ProductShowcase'
 import WhySantek from '@/components/WhySantek'
 import DeliverySection from '@/components/DeliverySection'
 import BizKimizSection from '@/components/BizKimizSection'
+import UretimTesisiSection from '@/components/UretimTesisiSection'
 import CTABanner from '@/components/CTABanner'
 import ContactSection from '@/components/ContactSection'
 import Footer from '@/components/Footer'
@@ -20,6 +21,7 @@ export default function Home() {
         <WhySantek />
         <DeliverySection />
         <BizKimizSection />
+        <UretimTesisiSection />
         <CTABanner />
         <ContactSection />
       </main>
