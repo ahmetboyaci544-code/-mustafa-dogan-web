@@ -82,13 +82,34 @@ export default function ProductShowcase() {
               <span style={{ color: '#14305c' }}>Portfolyosu</span>
             </h2>
           </div>
-          <p
-            className="text-[#6B6B6B] max-w-sm self-end"
-            style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, lineHeight: 1.7 }}
-          >
-            Küçük ölçekli yapılardan büyük şantiye projelerine kadar eksiksiz
-            malzeme tedariki, güçlü stok altyapısı ve hızlı lojistik.
-          </p>
+          <div className="flex flex-col gap-5 self-start max-w-sm">
+            <p
+              className="text-[#6B6B6B]"
+              style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, lineHeight: 1.7 }}
+            >
+              Küçük ölçekli yapılardan büyük şantiye projelerine kadar eksiksiz
+              malzeme tedariki, güçlü stok altyapısı ve hızlı lojistik.
+            </p>
+            <a
+              href="/katalog.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 group cursor-pointer w-fit px-6 py-3.5 border border-[#14305c] text-[#14305c] hover:bg-[#14305c] hover:text-white transition-all duration-200"
+            >
+              <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              </svg>
+              <span className="label transition-colors duration-200" style={{ fontFamily: 'var(--font-sans)' }}>
+                Ürün Kataloğu
+              </span>
+              <svg
+                className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
         </motion.div>
       </div>
 
