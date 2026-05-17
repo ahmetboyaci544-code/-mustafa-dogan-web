@@ -1,7 +1,8 @@
 'use client'
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import CatalogModal from '@/components/CatalogModal'
 
 const WHATSAPP = '905468965635'
 
@@ -20,11 +21,11 @@ const products = [
   {
     id: 'demir',
     index: '02',
-    category: 'Structural Steel',
-    title: 'İnşaat Demiri',
+    category: 'Telescopic Systems',
+    title: 'Teleskopik Demir Direk',
     description:
-      'Nervürlü inşaat demiri, profil çelik ve hasır. Yüksek mukavemet standartlarında sertifikalı çelik ürünler.',
-    specs: ['Nervürlü Demir', 'İnşaat Profili', 'Hasır Çelik', 'Bağlantı Elemanı'],
+      'Kalıp sistemlerinde kullanılan teleskopik demir direkler. Yüksek yük taşıma kapasitesi ve ayarlanabilir boy seçenekleriyle güvenli destek çözümleri.',
+    specs: ['Ayarlanabilir Boy', 'Yüksek Mukavemet', 'Kalıp Sistemi', 'Büyük Stok'],
     image: '/images/demir-sevkiyat.jpg',
     fallback: 'from-[#0E1A26] to-[#1C2B3A]',
   },
@@ -55,8 +56,15 @@ const products = [
 export default function ProductShowcase() {
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
+  const [catalogOpen, setCatalogOpen] = useState(false)
+
+  useEffect(() => {
+    document.body.style.overflow = catalogOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [catalogOpen])
 
   return (
+    <>
     <section id="urunler" ref={ref} className="bg-[#F7F6F3]">
       {/* Section header */}
       <div className="container-xl pt-12 pb-12">
@@ -90,10 +98,8 @@ export default function ProductShowcase() {
               Küçük ölçekli yapılardan büyük şantiye projelerine kadar eksiksiz
               malzeme tedariki, güçlü stok altyapısı ve hızlı lojistik.
             </p>
-            <a
-              href="/katalog.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setCatalogOpen(true)}
               className="inline-flex items-center gap-3 group cursor-pointer w-fit px-6 py-3.5 border border-[#14305c] text-[#14305c] hover:bg-[#14305c] hover:text-white transition-all duration-200"
             >
               <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,7 +114,7 @@ export default function ProductShowcase() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-            </a>
+            </button>
           </div>
         </motion.div>
       </div>
@@ -119,6 +125,11 @@ export default function ProductShowcase() {
         <ProductItem key={product.id} product={product} index={i} />
       ))}
     </section>
+
+    <AnimatePresence>
+      {catalogOpen && <CatalogModal onClose={() => setCatalogOpen(false)} />}
+    </AnimatePresence>
+    </>
   )
 }
 
