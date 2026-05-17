@@ -86,7 +86,7 @@ export default function UretimTesisiSection() {
   const doubled = [...items, ...items]
 
   return (
-    <section className="bg-[#F4F4F2] py-24 overflow-hidden">
+    <section className="bg-[#F4F4F2] pt-10 pb-24 overflow-hidden">
       <style>{`
         @keyframes uretim-scroll {
           0%   { transform: translateX(0); }
@@ -95,7 +95,7 @@ export default function UretimTesisiSection() {
       `}</style>
 
       {/* Header */}
-      <div className="container-xl mb-12">
+      <div className="container-xl mb-8">
         <div className="flex items-center gap-3 mb-6">
           <span className="block w-6 h-px bg-[#14305c]" />
           <span className="label">Üretim Tesisimiz</span>
@@ -185,6 +185,7 @@ export default function UretimTesisiSection() {
                   style={{ maxHeight: '80vh' }}
                   controls
                   autoPlay
+                  muted
                   playsInline
                 />
               )}
