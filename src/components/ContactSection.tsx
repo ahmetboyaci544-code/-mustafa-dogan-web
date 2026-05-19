@@ -76,6 +76,27 @@ export default function ContactSection() {
 
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-20">
 
+          {/* Harita */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.05, duration: 0.9 }}
+            className="lg:col-span-5 mb-4"
+          >
+            <div style={{ position: 'relative', width: '100%', height: '320px', overflow: 'hidden', border: '1px solid rgba(0,0,0,0.07)' }}>
+              <iframe
+                src="https://maps.google.com/maps?q=Kılıçözü+Sanayi+Sitesi+Hizarcılar+Sitesi+Kırşehir&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0, display: 'block' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Doğan Yapı Market Konum - Kırşehir Kılıçözü Sanayi Sitesi"
+              />
+            </div>
+          </motion.div>
+
           {/* Form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
