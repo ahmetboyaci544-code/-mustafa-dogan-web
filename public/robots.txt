@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mustafa-dogan-web.vercel.app/sitemap.xml
