@@ -17,7 +17,7 @@ const inter = Inter({
   display: 'swap',
 })
 
-const siteUrl = 'https://mustafa-dogan-web.vercel.app'
+const siteUrl = 'https://doğankereste.com.tr'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
