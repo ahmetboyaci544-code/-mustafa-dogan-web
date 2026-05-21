@@ -30,17 +30,41 @@ export default function ContactSection() {
   const [form, setForm] = useState<FormData>({ name: '', company: '', phone: '', email: '', product: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    if (e.target.name === 'phone') setPhoneError('')
+    setError('')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const digits = form.phone.replace(/\D/g, '')
+    if (digits.length < 10 || digits.length > 11) {
+      setPhoneError('Geçerli bir telefon numarası girin.')
+      return
+    }
     setLoading(true)
-    await new Promise((r) => setTimeout(r, 1200))
-    setLoading(false)
-    setSubmitted(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) {
+        const data = await res.json()
+        setError(data.error || 'Bir hata oluştu, lütfen tekrar deneyin.')
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setError('Bağlantı hatası, lütfen tekrar deneyin.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const inputClass =
@@ -131,7 +155,10 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-3">
                 <input name="name" value={form.name} onChange={handleChange} placeholder="Ad Soyad *" required className={inputClass} style={{ fontFamily: 'var(--font-sans)' }} />
                 <input name="company" value={form.company} onChange={handleChange} placeholder="Firma Adı" className={inputClass} style={{ fontFamily: 'var(--font-sans)' }} />
-                <input name="phone" value={form.phone} onChange={handleChange} placeholder="Telefon *" required type="tel" className={inputClass} style={{ fontFamily: 'var(--font-sans)' }} />
+                <div className="flex flex-col gap-1">
+                  <input name="phone" value={form.phone} onChange={handleChange} placeholder="Telefon *" required type="tel" className={inputClass} style={{ fontFamily: 'var(--font-sans)' }} />
+                  {phoneError && <span className="text-xs text-red-500" style={{ fontFamily: 'var(--font-sans)' }}>{phoneError}</span>}
+                </div>
                 <input name="email" value={form.email} onChange={handleChange} placeholder="E-Posta" type="email" className={inputClass} style={{ fontFamily: 'var(--font-sans)' }} />
                 <select name="product" value={form.product} onChange={handleChange} className={`${inputClass} sm:col-span-2`} style={{ fontFamily: 'var(--font-sans)' }}>
                   <option value="">Ürün Kategorisi Seçin</option>
@@ -149,6 +176,11 @@ export default function ContactSection() {
                   className={`${inputClass} sm:col-span-2 resize-none`}
                   style={{ fontFamily: 'var(--font-sans)' }}
                 />
+                {error && (
+                  <div className="sm:col-span-2 text-sm text-red-600 bg-red-50 border border-red-200 px-4 py-3" style={{ fontFamily: 'var(--font-sans)' }}>
+                    {error}
+                  </div>
+                )}
                 <div className="sm:col-span-2">
                   <button type="submit" disabled={loading} className="btn-primary w-full justify-center disabled:opacity-50">
                     {loading ? (
